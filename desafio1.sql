@@ -59,6 +59,13 @@ CREATE TABLE usuario_artista(
   FOREIGN KEY (artista_id) REFERENCES artistas(artista_id)
 ) engine = InnoDB;
 
+
+INSERT INTO plano(plano, valor)
+  VALUES ("gratuito", 0.00),
+        ("familiar", 7.99),
+        ("universitario", 5.99),
+        ("pessoal", 6.99);
+        
 INSERT INTO usuario(usuario_id, nome, idade, plano_id, data_assinatura)
   VALUES (NULL, "Thati", 23, 1, "2019-10-20"),   
         (NULL, "Cintia", 35, 2, "2017-12-30"),
@@ -103,11 +110,6 @@ INSERT INTO artistas(artista_id, nome)
           (10, 2),
           (10, 6);
 
-INSERT INTO plano(plano, valor)
-  VALUES ("gratuito", 0.00),
-        ("familiar", 7.99),
-        ("universitario", 5.99),
-        ("pessoal", 6.99);
 
   INSERT INTO historico(historico_id, usuario_id, historico_de_reproducao, data_reproducao)
     VALUES (NULL, 1, "Honey", "2020-02-28 10:45:55" ),
