@@ -2,19 +2,6 @@ CREATE DATABASE SpotifyClone;
 
 USE SpotifyClone;
 
-CREATE TABLE usuario(
-  usuario_id INT NOT NULL AUTO_INCREMENT,
-  nome VARCHAR(45) NOT NULL,
-  idade INT NOT NULL,
-  PRIMARY KEY (usuario_id)
-) engine = InnoDB;
-
-CREATE TABLE artistas(
-  artista_id INT NOT NULL AUTO_INCREMENT,
-  nome VARCHAR(45) NOT NULL,
-  PRIMARY KEY (artista_id)
-) engine = InnoDB;
-
 CREATE TABLE plano(
   plano_id INT NOT NULL AUTO_INCREMENT,
   plano VARCHAR(45) NOT NULL,
@@ -22,14 +9,21 @@ CREATE TABLE plano(
   PRIMARY KEY (plano_id)
 ) engine = InnoDB;
 
-CREATE TABLE usuario_plano(
-  usuario_id INT NOT NULL,
-  plano_id INT NOT NULL AUTO_INCREMENT,
+CREATE TABLE usuario(
+  usuario_id INT NOT NULL AUTO_INCREMENT,
+  nome VARCHAR(45) NOT NULL,
+  idade INT NOT NULL,
+  plano_id INT NOT NULL,
   data_assinatura DATE NOT NULL,
-  FOREIGN KEY (usuario_id) REFERENCES usuario(usuario_id),
+  PRIMARY KEY (usuario_id),
   FOREIGN KEY (plano_id) REFERENCES plano(plano_id)
 ) engine = InnoDB;
 
+CREATE TABLE artistas(
+  artista_id INT NOT NULL AUTO_INCREMENT,
+  nome VARCHAR(45) NOT NULL,
+  PRIMARY KEY (artista_id)
+) engine = InnoDB;
 
 CREATE TABLE historico(
   historico_id INT NOT NULL AUTO_INCREMENT,
@@ -65,17 +59,17 @@ CREATE TABLE usuario_artista(
   FOREIGN KEY (artista_id) REFERENCES artistas(artista_id)
 ) engine = InnoDB;
 
-INSERT INTO usuario(usuario_id, nome, idade)
-  VALUES (NULL, "Thati", 23),
-        (NULL, "Cintia", 35),
-        (NULL, "Bill", 20),
-        (NULL, "Roger", 45),
-        (NULL, "Norman", 58),
-        (NULL, "Patrick", 33),
-        (NULL, "Vivian", 26),
-        (NULL, "Carol", 19),
-        (NULL, "Angelina", 42),
-        (NULL, "Paul", 46);
+INSERT INTO usuario(usuario_id, nome, idade, plano_id, data_assinatura)
+  VALUES (NULL, "Thati", 23, 1, "2019-10-20"),   
+        (NULL, "Cintia", 35, 2, "2017-12-30"),
+        (NULL, "Bill", 20, 3,"2019-06-05"),
+        (NULL, "Roger", 45, 4, "2020-05-13"),
+        (NULL, "Norman", 58, 4, "2017-02-17"),
+        (NULL, "Patrick", 33, 2, "2017-01-06"),
+        (NULL, "Vivian", 26, 3, "2018-01-05"),
+        (NULL, "Carol", 19, 3, "2018-02-14"),
+        (NULL, "Angelina", 42, 2, "2018-04-29"),
+        (NULL, "Paul", 46, 2, "2017-01-17");
 
 INSERT INTO artistas(artista_id, nome)
   VALUES (1, "Walter Phoenix"),
@@ -109,23 +103,11 @@ INSERT INTO artistas(artista_id, nome)
           (10, 2),
           (10, 6);
 
-INSERT INTO plano(plano_id, plano, valor)
-  VALUES (NULL, "gratuito", 0.00),
-        (NULL, "familiar", 7.99),
-        (NULL, "universitario", 5.99),
-        (NULL, "pessoal", 6.99);
-
-INSERT INTO usuario_plano(usuario_id, plano_id, data_assinatura)
-  VALUES (1, 1, "2019-10-20"),
-          (2, 2, "2017-12-30"),
-          (3, 3, "2019-06-05"),
-          (4, 4, "2020-05-13"),
-          (5, 4, "2017-02-17"),
-          (6, 2, "2017-01-06"),
-          (7, 3, "2018-01-05"),
-          (8, 3, "2018-02-14"),
-          (9, 2, "2018-04-29"),
-          (10, 2, "2017-01-17");
+INSERT INTO plano(plano, valor)
+  VALUES ("gratuito", 0.00),
+        ("familiar", 7.99),
+        ("universitario", 5.99),
+        ("pessoal", 6.99);
 
   INSERT INTO historico(historico_id, usuario_id, historico_de_reproducao, data_reproducao)
     VALUES (NULL, 1, "Honey", "2020-02-28 10:45:55" ),
