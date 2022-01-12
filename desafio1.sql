@@ -25,15 +25,6 @@ CREATE TABLE artistas(
   PRIMARY KEY (artista_id)
 ) engine = InnoDB;
 
-CREATE TABLE historico(
-  historico_id INT NOT NULL AUTO_INCREMENT,
-  usuario_id INT NOT NULL,
-  historico_de_reproducao VARCHAR(45) NOT NULL,
-  data_reproducao DATETIME NOT NULL,
-  PRIMARY KEY (historico_id),
-  FOREIGN KEY (usuario_id) REFERENCES usuario(usuario_id)
-) engine = InnoDB;
-
 CREATE TABLE album(
   album_id INT NOT NULL AUTO_INCREMENT,
   album VARCHAR(45) NOT NULL,
@@ -52,9 +43,22 @@ CREATE TABLE cancoes(
   FOREIGN KEY (album_id) REFERENCES album(album_id)
 ) engine = InnoDB;
 
+CREATE TABLE historico(
+  historico_id INT NOT NULL AUTO_INCREMENT,
+  usuario_id INT NOT NULL,
+  music_id INT NOT NULL,
+  data_reproducao DATETIME NOT NULL,
+  PRIMARY KEY (historico_id),
+  FOREIGN KEY (usuario_id) REFERENCES usuario(usuario_id),
+  FOREIGN KEY (music_id) REFERENCES cancoes(cancao_id)
+) engine = InnoDB;
+
+
 CREATE TABLE usuario_artista(
+  usuario_artista_id INT NOT NULL AUTO_INCREMENT,
   usuario_id INT NOT NULL,
   artista_id INT NOT NULL,
+  PRIMARY KEY  (usuario_artista_id),
   FOREIGN KEY (usuario_id) REFERENCES usuario(usuario_id),
   FOREIGN KEY (artista_id) REFERENCES artistas(artista_id)
 ) engine = InnoDB;
@@ -110,58 +114,17 @@ INSERT INTO artistas(artista_id, nome)
           (10, 2),
           (10, 6);
 
-
-  INSERT INTO historico(historico_id, usuario_id, historico_de_reproducao, data_reproducao)
-    VALUES (NULL, 1, "Honey", "2020-02-28 10:45:55" ),
-          (NULL, 1, "Walking And Man", "2020-05-02 05:30:35"),
-          (NULL, 1, "Young And Father", "2020-03-06 11:22:33"),
-          (NULL, 1, "Diamond Power", "2020-08-05 08:05:17"),
-          (NULL, 1, "Let's Be Silly","2020-09-14 16:32:22" ),
-          (NULL, 2, "I Heard I Want To Bo Alone", "2020-01-02 07:40:33" ),
-          (NULL, 2, "Finding My Traditions", "2020-05-16 06:16:22" ),
-          (NULL, 2, "Without My Love", "2020-10-09 12:27:48" ),
-          (NULL, 2, "Baby", "2020-09-21 13:14:46" ),
-          (NULL, 3, "Magic Circus", "2020-11-13 16:55:13" ),
-          (NULL, 3, "Dance With Her Own", "2020-12-05 18:38:30" ),
-          (NULL, 3, "Hard And Time", "2020-07-30 10:00:00" ),
-          (NULL, 4, "Reflections Of Magic", "2021-08-15 17:10:10" ),
-          (NULL, 4, "I Ride Alone", "2021-07-10 15:20:30" ),
-          (NULL, 4, "Honey, I'm A Lone Wolf", "2021-01-09 01:44:33" ),
-          (NULL, 5, "Honey, So Do I",  "2020-07-03 19:33:28" ),
-          (NULL, 5, "Rock His Everything", "2017-02-24 21:14:22" ),
-          (NULL, 5, "Diamond Power", "2020-08-06 15:23:43" ),
-          (NULL, 5, "Soul For Us", "2020-11-10 13:52:27" ),
-          (NULL, 6, "Wouldn't It Be Nice", "2019-02-07 20:33:48" ),
-          (NULL, 6, "He Heard You're Bad For Me", "2017-01-24 00:31:17" ),
-          (NULL, 6, "He Hopes We Can't Stay", "2017-10-12 12:35:20" ),
-          (NULL, 6, "Walking And Game", "2018-05-29 14:56:41" ),
-          (NULL, 7, "Time Fireworks", "2018-05-09 22:30:49"),
-          (NULL, 7, "Troubles Of My Inner Fire", "2020-07-27 12:52:58"),
-          (NULL, 7, "Celebration Of More", "2018-01-16 18:40:43"),
-          (NULL, 8, "Baby", "2018-03-21 16:56:40"),
-          (NULL, 8, "You Make Me Feel So..", "2020-10-18 13:38:05"),
-          (NULL, 8, "He's Walking Away", "2019-05-25 08:14:03"),
-          (NULL, 8, "He's Trouble", "2021-08-15 21:37:09"),
-          (NULL, 9, "Thang Of Thunder", "2021-05-24 17:23:45"),
-          (NULL, 9, "Words Of Her Life", "2018-12-07 22:48:52"),
-          (NULL, 9, "Sweetie, Let's Go Wild", "2021-03-14 06:14:26"),
-          (NULL, 9,  "She Knows", "2020-04-01 03:36:00"),
-          (NULL, 10, "History Of My Roses", "2017-02-06 08:21:34"),
-          (NULL, 10, "Without My Love", "2017-12-04 05:33:43"),
-          (NULL, 10, "Rock His Everything", "2017-07-27 05:24:49"),
-          (NULL, 10, "Home Forever", "2017-12-25 01:03:57");
-        
- INSERT INTO album(album_id, album, artista_id, ano_de_lancamento)
-  VALUES (NULL, "Envious", 1, 1990),
-        (NULL, "Exuberant", 1, 1993),
-        (NULL, "Hallowed Steam", 2, 1995),
-        (NULL, "Incandescent", 3, 1998),
-        (NULL, "Temporary Culture", 4, 2001),
-        (NULL, "Library of liberty", 4, 2003),
-        (NULL, "Chained Down", 5, 2007),
-        (NULL, "Cabinet of fools", 5, 2012),
-        (NULL,"No guarantees",5, 2015),
-        (NULL, "Apparatus", 6, 2015);
+  INSERT INTO album(album_id, album, artista_id, ano_de_lancamento)
+    VALUES (NULL, "Envious", 1, 1990),
+          (NULL, "Exuberant", 1, 1993),
+          (NULL, "Hallowed Steam", 2, 1995),
+          (NULL, "Incandescent", 3, 1998),
+          (NULL, "Temporary Culture", 4, 2001),
+          (NULL, "Library of liberty", 4, 2003),
+          (NULL, "Chained Down", 5, 2007),
+          (NULL, "Cabinet of fools", 5, 2012),
+          (NULL,"No guarantees",5, 2015),
+          (NULL, "Apparatus", 6, 2015);
 
   INSERT INTO cancoes(cancao_id, nome, album_id, duracao)
     VALUES (NULL, "Soul For Us", 1, 200),
@@ -204,3 +167,47 @@ INSERT INTO artistas(artista_id, nome)
             (NULL, "Wouldn't It Be Nice", 10, 213),
             (NULL, "Baby", 10, 136),
             (NULL, "You Make Me Feel So..", 10, 83);
+
+  INSERT INTO historico(historico_id, usuario_id, music_id, data_reproducao)
+    VALUES (NULL, 1, 36, "2020-02-28 10:45:55" ),
+          (NULL, 1, 25, "2020-05-02 05:30:35"),
+          (NULL, 1, 23, "2020-03-06 11:22:33"),
+          (NULL, 1, 14, "2020-08-05 08:05:17"),
+          (NULL, 1, 15,"2020-09-14 16:32:22" ),
+          (NULL, 2, 34, "2020-01-02 07:40:33" ),
+          (NULL, 2, 24, "2020-05-16 06:16:22" ),
+          (NULL, 2, 21, "2020-10-09 12:27:48" ),
+          (NULL, 2, 39, "2020-09-21 13:14:46" ),
+          (NULL, 3, 6, "2020-11-13 16:55:13" ),
+          (NULL, 3, 3, "2020-12-05 18:38:30" ),
+          (NULL, 3, 26, "2020-07-30 10:00:00" ),
+          (NULL, 4, 2, "2021-08-15 17:10:10" ),
+          (NULL, 4, 35, "2021-07-10 15:20:30" ),
+          (NULL, 4, 27, "2021-01-09 01:44:33" ),
+          (NULL, 5, 7,  "2020-07-03 19:33:28" ),
+          (NULL, 5, 12, "2017-02-24 21:14:22" ),
+          (NULL, 5, 14, "2020-08-06 15:23:43" ),
+          (NULL, 5, 1, "2020-11-10 13:52:27" ),
+          (NULL, 6, 38, "2019-02-07 20:33:48" ),
+          (NULL, 6, 29, "2017-01-24 00:31:17" ),
+          (NULL, 6, 30, "2017-10-12 12:35:20" ),
+          (NULL, 6, 22, "2018-05-29 14:56:41" ),
+          (NULL, 7, 5, "2018-05-09 22:30:49"),
+          (NULL, 7, 4, "2020-07-27 12:52:58"),
+          (NULL, 7, 11, "2018-01-16 18:40:43"),
+          (NULL, 8, 39, "2018-03-21 16:56:40"),
+          (NULL, 8, 40, "2020-10-18 13:38:05"),
+          (NULL, 8, 32, "2019-05-25 08:14:03"),
+          (NULL, 8, 33, "2021-08-15 21:37:09"),
+          (NULL, 9, 16, "2021-05-24 17:23:45"),
+          (NULL, 9, 17, "2018-12-07 22:48:52"),
+          (NULL, 9, 8, "2021-03-14 06:14:26"),
+          (NULL, 9,  9, "2020-04-01 03:36:00"),
+          (NULL, 10, 20, "2017-02-06 08:21:34"),
+          (NULL, 10, 21, "2017-12-04 05:33:43"),
+          (NULL, 10, 12, "2017-07-27 05:24:49"),
+          (NULL, 10, 13, "2017-12-25 01:03:57");
+        
+
+
+
