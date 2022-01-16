@@ -1,4 +1,4 @@
-SELECT artistas.nome AS artistas,
+SELECT artistas.nome AS artista,
 album.album as album,
 COUNT(usuario_artista.usuario_id) AS seguidores
 FROM SpotifyClone.album AS album
