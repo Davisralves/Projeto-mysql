@@ -1,4 +1,4 @@
-SELECT MIN(plano.valor) AS faturamento_minimo,
+SELECT FORMAT(MIN(plano.valor), 2) AS faturamento_minimo,
 MAX(plano.valor) AS faturamento_maximo,
 TRUNCATE(AVG(plano.valor), 2) AS faturamento_medio,
 TRUNCATE(SUM(plano.valor), 2) AS faturamento_total
