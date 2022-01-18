@@ -6,5 +6,5 @@ LEFT JOIN SpotifyClone.artistas AS `artistas`
 ON artistas.artista_id = album.artista_id
 LEFT JOIN SpotifyClone.usuario_artista AS `usuario_artista`
 ON usuario_artista.artista_id = album.artista_id
-GROUP BY album.album, artista.nome
+GROUP BY album.album, artistas.nome
 ORDER BY `seguidores` DESC, `artista`, `album`;
