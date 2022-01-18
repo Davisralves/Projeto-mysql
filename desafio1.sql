@@ -1,15 +1,13 @@
 CREATE DATABASE SpotifyClone;
 
-USE SpotifyClone;
-
-CREATE TABLE plano(
+CREATE TABLE SpotifyClone.plano(
   plano_id INT NOT NULL AUTO_INCREMENT,
   plano VARCHAR(45) NOT NULL,
   valor DOUBLE NOT NULL,
   PRIMARY KEY (plano_id)
 ) engine = InnoDB;
 
-CREATE TABLE usuario(
+CREATE TABLE SpotifyClone.usuario(
   usuario_id INT NOT NULL AUTO_INCREMENT,
   nome VARCHAR(45) NOT NULL,
   idade INT NOT NULL,
@@ -19,13 +17,13 @@ CREATE TABLE usuario(
   FOREIGN KEY (plano_id) REFERENCES plano(plano_id)
 ) engine = InnoDB;
 
-CREATE TABLE artistas(
+CREATE TABLE SpotifyClone.artistas(
   artista_id INT NOT NULL AUTO_INCREMENT,
   nome VARCHAR(45) NOT NULL,
   PRIMARY KEY (artista_id)
 ) engine = InnoDB;
 
-CREATE TABLE album(
+CREATE TABLE SpotifyClone.album(
   album_id INT NOT NULL AUTO_INCREMENT,
   album VARCHAR(45) NOT NULL,
   artista_id INT NOT NULL,
@@ -34,7 +32,7 @@ CREATE TABLE album(
   FOREIGN KEY (artista_id) REFERENCES artistas(artista_id)
 ) engine = InnoDB;
 
-CREATE TABLE cancoes(
+CREATE TABLE SpotifyClone.cancoes(
   cancao_id INT NOT NULL AUTO_INCREMENT,
   nome VARCHAR(45) NOT NULL,
   album_id INT NOT NULL,
@@ -43,7 +41,7 @@ CREATE TABLE cancoes(
   FOREIGN KEY (album_id) REFERENCES album(album_id)
 ) engine = InnoDB;
 
-CREATE TABLE historico(
+CREATE TABLE SpotifyClone.historico(
   historico_id INT NOT NULL AUTO_INCREMENT,
   usuario_id INT NOT NULL,
   music_id INT NOT NULL,
@@ -54,7 +52,7 @@ CREATE TABLE historico(
 ) engine = InnoDB;
 
 
-CREATE TABLE usuario_artista(
+CREATE TABLE SpotifyClone.usuario_artista(
   usuario_artista_id INT NOT NULL AUTO_INCREMENT,
   usuario_id INT NOT NULL,
   artista_id INT NOT NULL,
@@ -64,13 +62,13 @@ CREATE TABLE usuario_artista(
 ) engine = InnoDB;
 
 
-INSERT INTO plano(plano, valor)
+INSERT INTO SpotifyClone.plano(plano, valor)
   VALUES ("gratuito", 0.00),
         ("familiar", 7.99),
         ("universitario", 5.99),
         ("pessoal", 6.99);
         
-INSERT INTO usuario(usuario_id, nome, idade, plano_id, data_assinatura)
+INSERT INTO SpotifyClone.usuario(usuario_id, nome, idade, plano_id, data_assinatura)
   VALUES (NULL, "Thati", 23, 1, "2019-10-20"),   
         (NULL, "Cintia", 35, 2, "2017-12-30"),
         (NULL, "Bill", 20, 3,"2019-06-05"),
@@ -82,7 +80,7 @@ INSERT INTO usuario(usuario_id, nome, idade, plano_id, data_assinatura)
         (NULL, "Angelina", 42, 2, "2018-04-29"),
         (NULL, "Paul", 46, 2, "2017-01-17");
 
-INSERT INTO artistas(artista_id, nome)
+INSERT INTO SpotifyClone.artistas(artista_id, nome)
   VALUES (1, "Walter Phoenix"),
         (2, "Peter Strong"),
         (3, "Lance Day"),
@@ -90,7 +88,7 @@ INSERT INTO artistas(artista_id, nome)
         (5, "Tyler Isle"),
         (6, "Fog");
 
-  INSERT INTO usuario_artista(usuario_id, artista_id)
+  INSERT INTO SpotifyClone.usuario_artista(usuario_id, artista_id)
     VALUES (1, 1),
           (1, 4),
           (1, 3),
@@ -114,7 +112,7 @@ INSERT INTO artistas(artista_id, nome)
           (10, 2),
           (10, 6);
 
-  INSERT INTO album(album_id, album, artista_id, ano_de_lancamento)
+  INSERT INTO SpotifyClone.album(album_id, album, artista_id, ano_de_lancamento)
     VALUES (NULL, "Envious", 1, 1990),
           (NULL, "Exuberant", 1, 1993),
           (NULL, "Hallowed Steam", 2, 1995),
@@ -126,7 +124,7 @@ INSERT INTO artistas(artista_id, nome)
           (NULL,"No guarantees",5, 2015),
           (NULL, "Apparatus", 6, 2015);
 
-  INSERT INTO cancoes(cancao_id, nome, album_id, duracao)
+  INSERT INTO SpotifyClone.cancoes(cancao_id, nome, album_id, duracao)
     VALUES (NULL, "Soul For Us", 1, 200),
             (NULL, "Reflections Of Magic", 1, 163),
             (NULL, "Dance With Her Own", 1, 116),
@@ -168,7 +166,7 @@ INSERT INTO artistas(artista_id, nome)
             (NULL, "Baby", 10, 136),
             (NULL, "You Make Me Feel So..", 10, 83);
 
-  INSERT INTO historico(historico_id, usuario_id, music_id, data_reproducao)
+  INSERT INTO SpotifyClone.historico(historico_id, usuario_id, music_id, data_reproducao)
     VALUES (NULL, 1, 36, "2020-02-28 10:45:55" ),
           (NULL, 1, 25, "2020-05-02 05:30:35"),
           (NULL, 1, 23, "2020-03-06 11:22:33"),
